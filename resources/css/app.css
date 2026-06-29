@@ -1,0 +1,361 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* ============================================
+   OpenMosque — Islamic-Inspired Design System
+   ============================================ */
+
+@theme {
+    /* Typography */
+    --font-sans: 'Inter', 'Noto Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Outfit', 'Noto Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+    --font-arabic: 'Amiri', 'Noto Naskh Arabic', serif;
+
+    /* Islamic-Inspired Color Palette */
+    --color-emerald-50: #ecfdf5;
+    --color-emerald-100: #d1fae5;
+    --color-emerald-200: #a7f3d0;
+    --color-emerald-300: #6ee7b7;
+    --color-emerald-400: #34d399;
+    --color-emerald-500: #10b981;
+    --color-emerald-600: #059669;
+    --color-emerald-700: #047857;
+    --color-emerald-800: #065f46;
+    --color-emerald-900: #064e3b;
+    --color-emerald-950: #022c22;
+
+    --color-gold-50: #fffbeb;
+    --color-gold-100: #fef3c7;
+    --color-gold-200: #fde68a;
+    --color-gold-300: #fcd34d;
+    --color-gold-400: #fbbf24;
+    --color-gold-500: #f59e0b;
+    --color-gold-600: #d97706;
+    --color-gold-700: #b45309;
+    --color-gold-800: #92400e;
+    --color-gold-900: #78350f;
+
+    --color-mosque-50: #f0fdf9;
+    --color-mosque-100: #ccfbef;
+    --color-mosque-200: #99f6df;
+    --color-mosque-300: #5eeace;
+    --color-mosque-400: #2dd4b8;
+    --color-mosque-500: #14b8a0;
+    --color-mosque-600: #0d9482;
+    --color-mosque-700: #0f766b;
+    --color-mosque-800: #115e56;
+    --color-mosque-900: #134e48;
+    --color-mosque-950: #042f2e;
+
+    /* Dark theme surface colors */
+    --color-surface-900: #0c1222;
+    --color-surface-800: #111827;
+    --color-surface-700: #1a2332;
+    --color-surface-600: #1f2937;
+    --color-surface-500: #293548;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* RTL Support */
+    [dir="rtl"] body {
+        font-family: var(--font-arabic), var(--font-sans);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+    }
+
+    [dir="rtl"] h1,
+    [dir="rtl"] h2,
+    [dir="rtl"] h3,
+    [dir="rtl"] h4,
+    [dir="rtl"] h5,
+    [dir="rtl"] h6 {
+        font-family: var(--font-arabic), var(--font-heading);
+    }
+}
+
+/* ============================================
+   Islamic Geometric Pattern (SVG background)
+   ============================================ */
+.islamic-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.islamic-pattern-gold {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+}
+
+@keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-shimmer {
+    background: linear-gradient(90deg, transparent 25%, rgba(16, 185, 129, 0.1) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ============================================
+   Glassmorphism
+   ============================================ */
+.glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-light {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+    background: rgba(12, 18, 34, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   Gradients
+   ============================================ */
+.gradient-mosque {
+    background: linear-gradient(135deg, #065f46, #0d9488, #14b8a6);
+}
+
+.gradient-gold {
+    background: linear-gradient(135deg, #92400e, #d97706, #fbbf24);
+}
+
+.gradient-hero {
+    background: linear-gradient(135deg, #022c22 0%, #064e3b 30%, #047857 60%, #0d9488 100%);
+}
+
+.gradient-dark {
+    background: linear-gradient(180deg, #0c1222, #111827);
+}
+
+/* Text gradients */
+.text-gradient-mosque {
+    background: linear-gradient(135deg, #34d399, #14b8a6, #0d9488);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-gold {
+    background: linear-gradient(135deg, #fcd34d, #f59e0b, #d97706);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   Admin Sidebar
+   ============================================ */
+.admin-sidebar {
+    background: linear-gradient(180deg, #0c1222 0%, #111827 50%, #0f1729 100%);
+    border-right: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.admin-sidebar .nav-link {
+    transition: all 0.2s ease;
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-sidebar .nav-link:hover {
+    background: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+}
+
+.admin-sidebar .nav-link.active {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(13, 148, 136, 0.1));
+    color: #34d399;
+    border-left: 3px solid #10b981;
+}
+
+[dir="rtl"] .admin-sidebar .nav-link.active {
+    border-left: none;
+    border-right: 3px solid #10b981;
+}
+
+/* ============================================
+   Cards
+   ============================================ */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.15);
+}
+
+/* ============================================
+   Prayer Time Card
+   ============================================ */
+.prayer-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.prayer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #10b981, #14b8a6, #fbbf24);
+}
+
+.prayer-card.active {
+    border-color: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+/* ============================================
+   Scrollbar (Admin)
+   ============================================ */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.3);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.5);
+}
+
+/* ============================================
+   Form Inputs
+   ============================================ */
+.form-input {
+    transition: all 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* ============================================
+   Mosque Dome Decoration (CSS Only)
+   ============================================ */
+.dome-decoration::before {
+    content: '🕌';
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.1;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+[dir="rtl"] .dome-decoration::before {
+    right: auto;
+    left: 0.5rem;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        position: fixed;
+        z-index: 50;
+        width: 260px;
+        height: 100vh;
+    }
+
+    [dir="rtl"] .admin-sidebar {
+        transform: translateX(100%);
+    }
+
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+}
