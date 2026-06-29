@@ -4,9 +4,11 @@
         <span style="font-size: 40px;">🕌</span>
     </div>
   </div>
-  <h1 align="center">OpenMosque</h1>
+  <h1 align="center">OpenMosque (v0.1 - Under Development)</h1>
   <p align="center">
     <strong>An open-source, modern, and multilingual website platform built for the global Muslim community.</strong>
+    <br />
+    <em>Note: This project is currently in early active development (v0.1). Features are being added rapidly.</em>
     <br />
     <br />
     <a href="#features">Features</a>
@@ -70,8 +72,8 @@ Follow these steps to set up OpenMosque locally or on your production server.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/openmosque.git
-   cd openmosque
+   git clone https://github.com/nandaauliaramadhannn/OpenMosque.git
+   cd OpenMosque
    ```
 
 2. **Install PHP dependencies**
