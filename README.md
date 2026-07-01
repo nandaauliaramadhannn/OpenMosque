@@ -150,6 +150,16 @@ Contributions make the open-source community an amazing place to learn, inspire,
 
 ---
 
+## 🙏 Acknowledgements & API Sources
+
+OpenMosque relies on the generosity of developers and organizations providing high-quality APIs for the global Muslim community. We would like to express our deepest gratitude to:
+
+- **[IslamicAPI.com](https://islamicapi.com/)**: For providing the core, highly-accurate endpoint that powers our primary Prayer Times and dynamic Hijri Calendar data. Thank you for building such a robust service!
+- **[Aladhan API](https://aladhan.com/)**: For their fantastic, globally accessible prayer times service, which serves as our reliable fallback engine.
+- **[BigDataCloud](https://www.bigdatacloud.com/)**: For their fast and free client-side reverse geocoding API used in location detection.
+
+---
+
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
