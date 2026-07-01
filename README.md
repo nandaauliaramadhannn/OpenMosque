@@ -138,6 +138,17 @@ After running the seeder, you can log in to the Admin Panel at `http://localhost
 
 ---
 
+## 💖 Support the Project
+
+OpenMosque is a completely free and open-source project. If you find this project helpful for your mosque, community, or personal learning, please consider supporting its continuous development!
+
+- 🇮🇩 **Local Support (Indonesia)**: [Donate via Saweria](https://saweria.co/nandaauliaramadhan)
+- 🌍 **Global Support (PayPal)**: [Donate via PayPal](https://www.paypal.com/donate/?business=nandaauliaramadhan308%40gmail.com&no_recurring=0&currency_code=USD) (or directly to `nandaauliaramadhan308@gmail.com`)
+
+Your support is deeply appreciated and keeps this project alive! *Jazakumullah Khairan.*
+
+---
+
 ## 🤝 Contributing
 
 Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make to OpenMosque are **greatly appreciated**!
