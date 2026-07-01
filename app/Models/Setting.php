@@ -33,8 +33,13 @@ class Setting extends Model
 
         $value = $setting->value;
 
+        // Special case: active_languages should always remain an array
+        if ($key === 'active_languages') {
+            return (array) $value;
+        }
+
         // If value is a single-element array with numeric key, unwrap it
-        if (is_array($value) && count($value) === 1 && isset($value[0])) {
+        if (is_array($value) && count($value) === 1 && array_key_exists(0, $value)) {
             return $value[0];
         }
 

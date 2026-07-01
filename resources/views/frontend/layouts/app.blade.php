@@ -5,13 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Home') — OpenMosque</title>
-    <meta name="description" content="@yield('meta_description', 'Welcome to our mosque — a place of worship, community, and learning.')">
+    @if(\App\Models\Setting::getValue('app_favicon'))
+        <link rel="icon" href="{{ Storage::url(\App\Models\Setting::getValue('app_favicon')) }}">
+    @endif
+
+    <title>@yield('title', \App\Models\Setting::getValue('seo_meta_title', 'Home')) — {{ \App\Models\Setting::getValue('app_name', 'OpenMosque') }}</title>
+    <meta name="description" content="@yield('meta_description', \App\Models\Setting::getValue('seo_meta_description', 'A welcoming place of worship serving the community.'))">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="@yield('title', 'OpenMosque')">
-    <meta property="og:description" content="@yield('meta_description', 'Welcome to our mosque')">
+    <meta property="og:title" content="@yield('title', \App\Models\Setting::getValue('seo_meta_title', 'Home')) — {{ \App\Models\Setting::getValue('app_name', 'OpenMosque') }}">
+    <meta property="og:description" content="@yield('meta_description', \App\Models\Setting::getValue('seo_meta_description', 'A welcoming place of worship serving the community.'))">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request()->url() }}">
+    @if(\App\Models\Setting::getValue('og_image'))
+        <meta property="og:image" content="{{ url(Storage::url(\App\Models\Setting::getValue('og_image'))) }}">
+    @endif
+
+    <!-- Google Search Console -->
+    @if(\App\Models\Setting::getValue('google_site_verification'))
+        <meta name="google-site-verification" content="{{ \App\Models\Setting::getValue('google_site_verification') }}" />
+    @endif
+
+    <!-- Google Analytics -->
+    @if(\App\Models\Setting::getValue('google_analytics_id'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ \App\Models\Setting::getValue('google_analytics_id') }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ \App\Models\Setting::getValue('google_analytics_id') }}');
+        </script>
+    @endif
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,17 +55,21 @@
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
          x-data="{ scrolled: false }"
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
-         :class="scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg shadow-black/5' : 'bg-transparent'">
+         :class="scrolled ? 'bg-white shadow-md shadow-emerald-900/5' : 'bg-transparent'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0">
-                    <div class="w-10 h-10 rounded-xl gradient-mosque flex items-center justify-center">
-                        <span class="text-xl">🕌</span>
-                    </div>
+                    @if(\App\Models\Setting::getValue('app_logo'))
+                        <img src="{{ Storage::url(\App\Models\Setting::getValue('app_logo')) }}" alt="Logo" class="w-10 h-10 object-contain">
+                    @else
+                        <div class="w-10 h-10 rounded-xl gradient-mosque flex items-center justify-center">
+                            <span class="text-xl">🕌</span>
+                        </div>
+                    @endif
                     <div>
                         <h1 class="text-lg font-bold font-heading" :class="scrolled ? 'text-emerald-800' : 'text-white'">
-                            {{ $mosque->getTranslation('name') ?? 'OpenMosque' }}
+                            {{ \App\Models\Setting::getValue('app_name', 'OpenMosque') }}
                         </h1>
                     </div>
                 </a>
@@ -82,11 +110,17 @@
                         </button>
                         <div x-show="langOpen" @click.outside="langOpen = false" x-transition
                              class="absolute right-0 mt-2 w-36 bg-white rounded-xl shadow-xl border border-gray-100 py-1 z-50">
-                            @foreach(['en' => 'English', 'ar' => 'العربية', 'id' => 'Indonesia'] as $code => $lang)
-                            <a href="?lang={{ $code }}"
-                               class="block px-4 py-2 text-sm text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 {{ app()->getLocale() === $code ? 'text-emerald-600 font-medium' : '' }}">
-                                {{ $lang }}
-                            </a>
+                            @php
+                                $allLangs = ['en' => 'English', 'id' => 'Indonesia', 'ar' => 'العربية'];
+                                $activeLangs = \App\Models\Setting::getValue('active_languages', ['en', 'id', 'ar']);
+                            @endphp
+                            @foreach($activeLangs as $code)
+                                @if(isset($allLangs[$code]))
+                                <a href="?lang={{ $code }}"
+                                   class="block px-4 py-2 text-sm text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 {{ app()->getLocale() === $code ? 'text-emerald-600 font-medium' : '' }}">
+                                    {{ $allLangs[$code] }}
+                                </a>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -135,10 +169,14 @@
                 {{-- Mosque Info --}}
                 <div class="lg:col-span-1">
                     <a href="{{ route('home') }}" class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl gradient-mosque flex items-center justify-center">
-                            <span class="text-xl">🕌</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-gradient-mosque font-heading">OpenMosque</h3>
+                        @if(\App\Models\Setting::getValue('app_logo'))
+                            <img src="{{ Storage::url(\App\Models\Setting::getValue('app_logo')) }}" alt="Logo" class="w-10 h-10 object-contain">
+                        @else
+                            <div class="w-10 h-10 rounded-xl gradient-mosque flex items-center justify-center">
+                                <span class="text-xl">🕌</span>
+                            </div>
+                        @endif
+                        <h3 class="text-lg font-bold text-gradient-mosque font-heading">{{ \App\Models\Setting::getValue('app_name', 'OpenMosque') }}</h3>
                     </a>
                     <p class="text-sm text-gray-500 leading-relaxed mb-4">
                         {{ $mosque->getTranslation('description') ?? __('A place of worship, community, and learning for all.') }}
@@ -212,7 +250,7 @@
         <div class="border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
                 <p class="text-xs text-gray-600">
-                    © {{ date('Y') }} OpenMosque. {{ __('Open Source') }} — <a href="https://github.com/openmosque" class="text-emerald-500/60 hover:text-emerald-400 transition-colors">GitHub</a>
+                    © {{ date('Y') }} {{ \App\Models\Setting::getValue('app_name', 'OpenMosque') }}. {{ __('Open Source') }} — <a href="https://github.com/openmosque" class="text-emerald-500/60 hover:text-emerald-400 transition-colors">GitHub</a>
                 </p>
                 <p class="text-xs text-gray-600">
                     {{ __('Built with') }} ❤️ {{ __('for the Muslim community') }}

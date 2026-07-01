@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\SetLocale;
@@ -12,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 | Public Frontend Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware([SetLocale::class])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +36,8 @@ Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        
+        // System Settings
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
     });

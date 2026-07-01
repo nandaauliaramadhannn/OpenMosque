@@ -136,12 +136,30 @@
     50% { transform: translateY(-6px); }
 }
 
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
 .animate-fade-in {
     animation: fade-in 0.5s ease-out forwards;
 }
 
 .animate-fade-in-up {
     animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-spin-slow {
+    animation: spin-slow 15s linear infinite;
+}
+
+.animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
 }
 
 .animate-shimmer {
@@ -183,10 +201,11 @@
 }
 
 .glass-dark {
-    background: rgba(12, 18, 34, 0.8);
+    background: rgba(4, 47, 46, 0.75); /* Deep mosque green */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.12);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================
@@ -227,8 +246,20 @@
    Admin Sidebar
    ============================================ */
 .admin-sidebar {
-    background: linear-gradient(180deg, #0c1222 0%, #111827 50%, #0f1729 100%);
-    border-right: 1px solid rgba(16, 185, 129, 0.1);
+    background: #ffffff;
+    border-right: 1px solid rgba(13, 148, 130, 0.15); /* Teal border */
+}
+.admin-sidebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230d9482' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+.admin-sidebar > * {
+    position: relative;
+    z-index: 1;
 }
 
 .admin-sidebar .nav-link {
@@ -236,22 +267,23 @@
     border-radius: 0.5rem;
     position: relative;
     overflow: hidden;
+    color: #4b5563; /* text-gray-600 */
 }
 
 .admin-sidebar .nav-link:hover {
-    background: rgba(16, 185, 129, 0.1);
-    color: #34d399;
+    background: rgba(13, 148, 130, 0.05); /* Teal very light */
+    color: #0d9482; /* Teal */
 }
 
 .admin-sidebar .nav-link.active {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(13, 148, 136, 0.1));
-    color: #34d399;
-    border-left: 3px solid #10b981;
+    background: rgba(13, 148, 130, 0.1);
+    color: #0d9482;
+    border-left: 3px solid #0d9482;
 }
 
 [dir="rtl"] .admin-sidebar .nav-link.active {
     border-left: none;
-    border-right: 3px solid #10b981;
+    border-right: 3px solid #0d9482;
 }
 
 /* ============================================
@@ -338,24 +370,4 @@
     left: 0.5rem;
 }
 
-/* ============================================
-   Responsive
-   ============================================ */
-@media (max-width: 768px) {
-    .admin-sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        position: fixed;
-        z-index: 50;
-        width: 260px;
-        height: 100vh;
-    }
 
-    [dir="rtl"] .admin-sidebar {
-        transform: translateX(100%);
-    }
-
-    .admin-sidebar.open {
-        transform: translateX(0);
-    }
-}

@@ -23,15 +23,19 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Priority: URL segment > Session > Browser > Default
-        $locale = $request->segment(1);
+        // Load dynamic settings
+        $supportedLocales = \App\Models\Setting::getValue('active_languages', ['en', 'id', 'ar']);
+        $defaultLocale = \App\Models\Setting::getValue('default_language', 'en');
 
-        if (!in_array($locale, $this->supportedLocales)) {
-            $locale = session('locale', $this->detectBrowserLocale($request));
+        // Priority: Query string '?lang=' > URL segment > Session > Browser > Default
+        $locale = $request->query('lang') ?: $request->segment(1);
+
+        if (!in_array($locale, $supportedLocales)) {
+            $locale = session('locale', $this->detectBrowserLocale($request, $supportedLocales, $defaultLocale));
         }
 
-        if (!in_array($locale, $this->supportedLocales)) {
-            $locale = config('app.locale', 'en');
+        if (!in_array($locale, $supportedLocales)) {
+            $locale = $defaultLocale;
         }
 
         app()->setLocale($locale);
@@ -41,7 +45,7 @@ class SetLocale
         $isRtl = in_array($locale, $this->rtlLocales);
         view()->share('isRtl', $isRtl);
         view()->share('currentLocale', $locale);
-        view()->share('supportedLocales', $this->supportedLocales);
+        view()->share('supportedLocales', $supportedLocales);
 
         return $next($request);
     }
@@ -49,9 +53,9 @@ class SetLocale
     /**
      * Detect browser's preferred language.
      */
-    protected function detectBrowserLocale(Request $request): string
+    protected function detectBrowserLocale(Request $request, array $supportedLocales, string $defaultLocale): string
     {
-        $browserLocale = $request->getPreferredLanguage($this->supportedLocales);
-        return $browserLocale ?? config('app.locale', 'en');
+        $browserLocale = $request->getPreferredLanguage($supportedLocales);
+        return $browserLocale ?? $defaultLocale;
     }
 }

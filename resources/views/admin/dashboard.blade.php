@@ -8,12 +8,12 @@
     {{-- Page Header --}}
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-            <h1 class="text-2xl font-bold font-heading text-white">{{ __('Dashboard') }}</h1>
+            <h1 class="text-2xl font-bold font-heading text-gray-900">{{ __('Dashboard') }}</h1>
             <p class="text-sm text-gray-500 mt-1">{{ __('Welcome back') }}, {{ auth()->user()->name ?? 'Admin' }} 👋</p>
         </div>
         <div class="flex items-center gap-3">
             <a href="{{ route('home') }}" target="_blank"
-               class="flex items-center gap-2 px-4 py-2 text-sm bg-white/5 hover:bg-white/10 text-gray-300 rounded-xl border border-white/10 transition-all">
+               class="flex items-center gap-2 px-4 py-2 text-sm bg-gray-50 hover:bg-gray-100 text-gray-300 rounded-xl border border-gray-200 transition-all">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
                 {{ __('View Website') }}
             </a>
@@ -23,12 +23,11 @@
     {{-- Stats Cards --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {{-- Announcements --}}
-        <div class="glass-dark rounded-2xl p-5 card-hover animate-fade-in-up delay-100 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-20 h-20 bg-emerald-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-5 card-hover relative overflow-hidden">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wider">{{ __('Announcements') }}</p>
-                    <p class="text-3xl font-bold text-white mt-2">{{ $stats['announcements'] ?? 0 }}</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['announcements'] ?? 0 }}</p>
                     <p class="text-xs text-gray-500 mt-1">{{ __('Total published') }}</p>
                 </div>
                 <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
@@ -38,12 +37,11 @@
         </div>
 
         {{-- Upcoming Events --}}
-        <div class="glass-dark rounded-2xl p-5 card-hover animate-fade-in-up delay-200 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-5 card-hover relative overflow-hidden">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wider">{{ __('Upcoming Events') }}</p>
-                    <p class="text-3xl font-bold text-white mt-2">{{ $stats['events'] ?? 0 }}</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['events'] ?? 0 }}</p>
                     <p class="text-xs text-gray-500 mt-1">{{ __('Scheduled') }}</p>
                 </div>
                 <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center">
@@ -53,12 +51,11 @@
         </div>
 
         {{-- Donations This Month --}}
-        <div class="glass-dark rounded-2xl p-5 card-hover animate-fade-in-up delay-300 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-20 h-20 bg-gold-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-5 card-hover relative overflow-hidden">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wider">{{ __('Donations') }}</p>
-                    <p class="text-3xl font-bold text-white mt-2">${{ number_format($stats['donations_this_month'] ?? 0, 0) }}</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">${{ number_format($stats['donations_this_month'] ?? 0, 0) }}</p>
                     <p class="text-xs text-gray-500 mt-1">{{ __('This month') }}</p>
                 </div>
                 <div class="w-11 h-11 rounded-xl bg-yellow-500/10 flex items-center justify-center">
@@ -68,12 +65,11 @@
         </div>
 
         {{-- Pending Requests --}}
-        <div class="glass-dark rounded-2xl p-5 card-hover animate-fade-in-up delay-400 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-20 h-20 bg-purple-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-5 card-hover relative overflow-hidden">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wider">{{ __('Pending Requests') }}</p>
-                    <p class="text-3xl font-bold text-white mt-2">{{ $stats['pending_requests'] ?? 0 }}</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['pending_requests'] ?? 0 }}</p>
                     <p class="text-xs text-gray-500 mt-1">{{ __('Needs attention') }}</p>
                 </div>
                 <div class="w-11 h-11 rounded-xl bg-purple-500/10 flex items-center justify-center">
@@ -86,9 +82,9 @@
     {{-- Two Column Layout --}}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {{-- Upcoming Events List --}}
-        <div class="lg:col-span-2 glass-dark rounded-2xl p-6 animate-fade-in">
+        <div class="lg:col-span-2 bg-white border border-gray-100 shadow-sm rounded-2xl p-6">
             <div class="flex items-center justify-between mb-5">
-                <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                     <i data-lucide="calendar-days" class="w-5 h-5 text-emerald-400"></i>
                     {{ __('Upcoming Events') }}
                 </h2>
@@ -98,13 +94,13 @@
             @if(isset($upcomingEvents) && $upcomingEvents->count())
                 <div class="space-y-3">
                     @foreach($upcomingEvents as $event)
-                    <div class="flex items-center gap-4 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors">
-                        <div class="w-12 h-12 rounded-xl gradient-mosque flex flex-col items-center justify-center text-white shrink-0">
+                    <div class="flex items-center gap-4 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+                        <div class="w-12 h-12 rounded-xl gradient-mosque flex flex-col items-center justify-center text-gray-900 shrink-0">
                             <span class="text-xs font-bold leading-none">{{ $event->start_date->format('d') }}</span>
                             <span class="text-[9px] uppercase">{{ $event->start_date->format('M') }}</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-white truncate">{{ $event->getTranslation('title') }}</p>
+                            <p class="text-sm font-medium text-gray-900 truncate">{{ $event->getTranslation('title') }}</p>
                             <p class="text-xs text-gray-500">{{ $event->start_date->format('h:i A') }} · {{ $event->getTranslation('location') }}</p>
                         </div>
                         @if($event->is_featured)
@@ -115,16 +111,16 @@
                 </div>
             @else
                 <div class="text-center py-8">
-                    <i data-lucide="calendar-x" class="w-12 h-12 text-gray-700 mx-auto mb-3"></i>
+                    <i data-lucide="calendar-x" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
                     <p class="text-sm text-gray-500">{{ __('No upcoming events') }}</p>
                 </div>
             @endif
         </div>
 
         {{-- Recent Activity --}}
-        <div class="glass-dark rounded-2xl p-6 animate-fade-in">
+        <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-6">
             <div class="flex items-center justify-between mb-5">
-                <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                     <i data-lucide="activity" class="w-5 h-5 text-emerald-400"></i>
                     {{ __('Recent Activity') }}
                 </h2>
@@ -152,7 +148,7 @@
                 </div>
             @else
                 <div class="text-center py-8">
-                    <i data-lucide="activity" class="w-10 h-10 text-gray-700 mx-auto mb-3"></i>
+                    <i data-lucide="activity" class="w-10 h-10 text-gray-300 mx-auto mb-3"></i>
                     <p class="text-sm text-gray-500">{{ __('No recent activity') }}</p>
                 </div>
             @endif
@@ -160,9 +156,9 @@
     </div>
 
     {{-- Recent Donations --}}
-    <div class="glass-dark rounded-2xl p-6 animate-fade-in">
+    <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-6">
         <div class="flex items-center justify-between mb-5">
-            <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+            <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                 <i data-lucide="heart-handshake" class="w-5 h-5 text-gold-400"></i>
                 {{ __('Recent Donations') }}
             </h2>
@@ -182,7 +178,7 @@
                 </thead>
                 <tbody>
                     @forelse($recentDonations ?? [] as $donation)
-                    <tr class="border-b border-white/[0.03] hover:bg-white/[0.02]">
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
                         <td class="py-3 px-3">
                             <span class="text-gray-300">{{ $donation->is_anonymous ? __('Anonymous') : ($donation->donor_name ?? __('N/A')) }}</span>
                         </td>
@@ -191,7 +187,7 @@
                                 {{ $donation->type }}
                             </span>
                         </td>
-                        <td class="py-3 px-3 text-white font-medium">${{ number_format($donation->amount, 2) }}</td>
+                        <td class="py-3 px-3 text-gray-900 font-medium">${{ number_format($donation->amount, 2) }}</td>
                         <td class="py-3 px-3">
                             <span class="inline-flex items-center gap-1 text-xs
                                 {{ $donation->status === 'completed' ? 'text-emerald-400' : '' }}

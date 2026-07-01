@@ -32,12 +32,12 @@ Whether you need to display daily prayer times, manage community events, announc
 ### 🎯 Key Features
 
 - 🌍 **Multilingual & RTL Support**: Native support for English, Arabic, Bahasa Indonesia, and more, with full Right-to-Left (RTL) layout handling.
-- 🕌 **Prayer Times Management**: Display daily schedules, Iqamah times, and Jumuah timings. Supports both manual input and auto-calculation via API.
+- 🕌 **Smart Prayer Times**: Real-time daily schedules powered by geolocation. Supports dual API engines natively: **IslamicAPI** (Primary, token-based) and **Aladhan** (Fallback).
 - 📅 **Events & Announcements**: Keep your congregation informed with rich-text announcements and event RSVP tracking.
 - 💳 **Donation Campaigns**: Transparent financial tracking, multiple donation categories (Zakat, Sadaqah, Waqf), and visual progress bars for campaigns.
 - 🤝 **Services Booking**: Manage requests for Nikah (Marriage), Janazah (Funeral), Counseling, and Shahada.
-- 🎨 **Islamic-Inspired Design**: Beautiful premium UI featuring glassmorphism, geometric patterns, and a carefully curated Emerald & Gold color palette.
-- 📱 **Mobile First**: Fully responsive design for both the public-facing website and the comprehensive Admin Panel.
+- 🎨 **Modern Clean Design**: Beautiful premium Light Theme UI featuring solid cards, elegant typography, micro-animations, and a curated Emerald & Gold color palette.
+- 📱 **Mobile First UX**: Fully responsive design optimized for seamless horizontal swiping and perfect touch interactions on smaller devices.
 
 ---
 
@@ -131,9 +131,9 @@ After running the seeder, you can log in to the Admin Panel at `http://localhost
 
 ## 🛣 Roadmap
 
-- [x] **Phase 1**: Foundation (Database schema, UUID, Multilingual setup, Admin/Public Layouts, Auth).
-- [ ] **Phase 2**: Core Content (CRUD for Announcements, Events, Pages, Media Library).
-- [ ] **Phase 3**: Engagement (Donation integration, Contact forms, Prayer Times API sync).
+- [x] **Phase 1**: Foundation (Database schema, UUID, Multilingual setup, Admin/Public Layouts, Auth, Frontend Revamp).
+- [ ] **Phase 2**: Core Content (CRUD for Announcements, Events, Pages, Media Library, Admin Menus).
+- [ ] **Phase 3**: Engagement (Donation integration, Contact forms, Prayer Times API sync & Geolocation [✓]).
 - [ ] **Phase 4**: Polish (Theme Customizer, SEO tools, PDF Exports, Documentation).
 
 ---
